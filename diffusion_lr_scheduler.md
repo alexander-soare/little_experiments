@@ -31,7 +31,7 @@ Beta distribution lower/mean/upper (%) | 53.8 / 56.0 / 58.2 | 37.1 / 39.2 / 41.4
 
 ---
 
-## Appendix Reproducibility
+## Appendix: Reproducibility
 
 The experiments were conducted on [this branch of the LeRobot library](https://github.com/alexander-soare/lerobot/tree/experiment_lr_scheduler).
 
