@@ -31,7 +31,9 @@ Beta distribution lower/mean/upper (%) | 53.8 / 56.0 / 58.2 | 37.1 / 39.2 / 41.4
 
 ---
 
-## Reproducibility
+<div style="color:#555555">
+
+## Appendix Reproducibility
 
 The experiments were conducted on [this branch of the LeRobot library](https://github.com/alexander-soare/lerobot/tree/experiment_lr_scheduler).
 
@@ -76,3 +78,5 @@ python lerobot/scripts/eval.py \
     policy.noise_scheduler_type=DDIM \
     policy.num_inference_steps=10
 ```
+
+</div>
