@@ -21,7 +21,7 @@ Here's what the success rate looks like (50 evals per point with random initiali
 
 We're clearly seeing that the training run with the cosine scheduler seems to outperform the others. We also get a hint that a flat LR of 1e-4 might be a bit high.
 
-Here are the metrics for 500 episodes worth of evaluation. For the success rate I added an extra row with confidence bounds. This assumes a uniform prior over success probability and computes the beta posterior, then calculates the mean and lower/upper confidence bounds (with a 68.2% confidence interval centered on the mean).
+Here are the metrics for 500 episodes worth of evaluation. For the success rate I added an extra row with confidence bounds (see [beta_distribution.md](./beta_distribution.md) for details on how I compute these).
 
 <blank>|Cosine (1e-4)|Flat (1e-4)|Flat (5e-4)|Flat (2.5e-4)
 -|-|-|-|-
