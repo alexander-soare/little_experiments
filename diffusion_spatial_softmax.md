@@ -116,7 +116,7 @@ On the other hand, at least I can quite confidently say that tuning the image fe
 
 ## Appendix: Reproducibility
 
-The experiments were conducted on [this branch of the LeRobot library](hhttps://github.com/alexander-soare/lerobot/tree/experiment_diffusion_spatial_softmax) where I've added the visualization code (in `eval.py`) and the modifications needed to use global average pooling instead of spatial softmax.
+The experiments were conducted on [this branch of the LeRobot library](https://github.com/alexander-soare/lerobot/tree/experiment_diffusion_spatial_softmax) where I've added the visualization code (in `eval.py`) and the modifications needed to use global average pooling instead of spatial softmax.
 
 The results were logged to WandB. You may view them [here](https://wandb.ai/alexander-soare/lerobot?nw=wk7ygethww).
 
