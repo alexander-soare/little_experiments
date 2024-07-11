@@ -1,6 +1,6 @@
 In this little experiment I wanted to really get a feel for the multi-modality (in the sense of probability distributions) of generative imitation learning policies like [Diffusion Policy (DP)](https://arxiv.org/abs/2303.04137) and [Action Chunking Transformers (ACT)](https://arxiv.org/abs/2304.13705).
 
-**TLDR**: At least in the PushT environment. These models do not produce multi-modal action trajectory distributions! Furthermore, the distributions seem to be much sharper than one might expect.
+**TLDR**: At least in the PushT environment. These models do not produce multi-modal action trajectory distributions! Furthermore, the distributions seem to be much sharper than one might expect. Adding small gaussian noise to the observations is a better means of producing multimodality, and can be used to the same effect with discriminative models like ACT trained without the variational objective.
 
 ### Quick background
 
@@ -50,9 +50,11 @@ Finally, what might be interesting, is to add noise to the proprioceptive state 
 
 ![](.images/multimodal_7.gif)
 
-Just to drive that last point home, here's an ACT policy trained without a VAE objective but with noised state vectors. It looks much like the GIF above. One interesting observation I'll make here is that perhaps it's sufficient to have noisy inputs to get the sort of multi-modality we are looking for. _Maybe_ generative modelling is not actually necessary.
+Just to drive that last point home, here's an ACT policy trained without a VAE objective but with noised state vectors. It looks much like the GIF above. One interesting observation I'll make here is that perhaps it's sufficient to have noisy inputs to get the sort of multi-modality we are looking for.
 
 ![](.images/multimodal_8.gif)
+
+_Maybe_ generative modelling is not actually necessary. I've heard anecdotal evidence of this from other researchers in the field. Also, my colleagues at LeRobot conducted some ablation experiments showing that they couldn't get an improvement by using the VAE objective (see the report [here](https://wandb.ai/marinabar/lerobot/reports/CVAE-in-the-ACT-policy---Vmlldzo4NDkwMzkx?accessToken=1g8hfcgyfzonhwbjg056oqa5excp4mk4cz53bit5vrm5pvdgh4sebg0994df3mpa)).
 
 ### What to make of all this
 
@@ -73,6 +75,8 @@ With this setup, I wanted to double check a point I made earlier: "trajectories 
 Finally, I also tried an experiment with [VQ-BeT](https://sjlee.cc/vq-bet/simulated_index.html). This is a GPT-style transformer that predicts action tokens. The "multi-modality" comes from the fact that it predicts a categorical distribution over possible tokens and we use multinomial sampling to select one. We can definitely see the multinomial nature of the multimodality in the GIF below! 
 
 ![](.images/vqbet_multimodal.gif)
+
+What's very cool about VQ-BeT is that the action tokens are learned with a VQ-VAE, so we are looking at purely learned modes in the GIF above 🤓.
 
 ---
 
