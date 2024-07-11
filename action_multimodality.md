@@ -30,7 +30,7 @@ We do see some spread in the distribution but it mostly looks uni-modal and shar
 
 To take things further, I wanted full control over where I'll run inference rather than being at the whim of the where the policy wants to go. So I rigged things up so that I could control the robot with mouse input. Then I ran inference on _every_ step. That way I could explore, and purposefully manufacture scenarios where multi-modality _should_ arise. In the following set of GIFs I do just that, with DP and ACT side-by-side.
 
-*Note: The official DP implementation uses 2 steps worth of observation history. Here I just take the current step and copy it back to the previous step, effectively just using one step of history.*
+*Note: The official DP implementation uses 2 steps worth of observation history. Here I just take the current step and copy it back to the previous step, effectively just using one step of history. I do this to match ACT that only uses one observations step. Check the [bonus visualizations](#bonus-visualizations) to see what happens when I put the observation history back in.*
 
 *Note: The official ACT implementation uses a zero-vector for the latent at inference time to get deterministic rollouts. Here I do sampling from the standard normal distribution instead.*
 
@@ -42,6 +42,7 @@ Next, I set up a scenario where we would expect bi-modal distributions. There ar
 1. The DP distribution seems to be much smoother (or spread out) than the ACT distribution.
 2. ACT seems to switch modes sooner than DP, indicating some form of relative bias between the two models.
 3. Both distributions actually look uni-modal all the way, whereas I would have expected a transition from uni-modal, to bi-modal, back to uni-modal. Also related to this is that the trajectories that seem to hedge between the two modes look like they are bad trajectories!
+   - Check out the [bonus visualizations](#bonus-visualizations) section where I dig a little deeper on these bad trajectories.
 4. For both models, there seems to be a bias to going around the T in a counter-clockwise direction over a clockwise direction. This might say something about the way the demonstration data was collected (I believe the demonstration data was made by human teleoperators).
 
 ![](.images/multimodal_2.gif)
@@ -68,7 +69,7 @@ Generative modeling is supposed to overcome a problem that discriminative modeli
 2. We also observed that observation noise is enough to induce "multi-modal" outputs, even in the case of a discriminative model.
 
 
-Overall, I'm leaning towards thinking that generative modeling is not necessary, at least for small scale experiments. This is especially the case in real world robots where the observations are bound to be noisy anyway. I think if anything could prove me wrong: it would be doing much larger scale experiments with complex environments and a lot of training data. Perhaps in such a regime, the model has more of a chance of learning nuanced multi-modal behavior. The geek in me certainly hopes that this would be the case 🤓.
+Overall, I'm leaning towards thinking that generative modeling is not effective, nor necessary, at least for small scale experiments. I think if anything could prove me wrong: it would be doing much larger scale experiments with complex environments and a lot of training data. Perhaps in such a regime, the model has more of a chance of learning nuanced multi-modal behavior. The geek in me certainly hopes that this would be the case 🤓. I'm now left with perhaps more questions than when I started!
 
 ### Bonus visualizations
 
